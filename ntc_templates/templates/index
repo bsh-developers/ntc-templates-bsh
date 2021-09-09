@@ -1,3 +1,7 @@
+# Original copyright - 2015 Jason Edelman <jason@networktocode.com>
+# Network to Code, LLC
+# Modifications copyright - 2021 BSH <opensource@bsh.ru>
+
 # First line is the header fields for columns and is mandatory.
 # Regular expressions are supported in all fields except the first.
 # Last field supports variable length command completion.
