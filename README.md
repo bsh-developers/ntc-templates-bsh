@@ -1,7 +1,4 @@
-[![Build Status](https://travis-ci.org/networktocode/ntc-templates.svg?branch=master)](https://travis-ci.org/networktocode/ntc-templates)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
-
-NTC TEMPLATES
+NTC TEMPLATES BSH
 =============
 
 Repository of TextFSM Templates for Network Devices, and Python wrapper for TextFSM's CliTable.
@@ -20,18 +17,18 @@ The project can be installed using either Git + Poetry or PyPI.
 #### Git
 
 ```shell
-$ git clone git@github.com:networktocode/ntc-templates.git
-$ 
+$ git clone git@github.com:bsh-developers/ntc-templates-bsh.git
+$
 # Optional steps to install ntc-templates as a python package
 $ poetry install
-$ 
+$
 ```
 
 #### PyPI
 
 ```shell
-$ pip install ntc_templates
-$ 
+$ pip install ntc-templates-bsh
+$
 ```
 
 #### Usage
@@ -67,7 +64,7 @@ $
         'interfaces': ['Fa0/1', 'Fa0/2', 'Fa0/3', 'Fa0/4', 'Fa0/5', 'Fa0/6', 'Fa0/7', 'Fa0/8']
     }
 ]
->>> 
+>>>
 ```
 
 ### Define Custom Templates Directory
@@ -136,7 +133,7 @@ Start
 ```
 ##### States
 
-If the raw output has a heading, the `Start` state should match on the column headings and then transition to another state that will match the device's output table with the capture groups. This helps ensure the regex patterns for the capture groups are attempting to match the correct information, and allows templates to easily add additional States for tables that have different headings. 
+If the raw output has a heading, the `Start` state should match on the column headings and then transition to another state that will match the device's output table with the capture groups. This helps ensure the regex patterns for the capture groups are attempting to match the correct information, and allows templates to easily add additional States for tables that have different headings.
 Example:
 
 *Raw Output*
@@ -217,7 +214,7 @@ The `{{ command_name }}` directory should include the `.raw` file that includes 
 $ ls tests/cisco_ios/show_clock/
 cisco_ios_show_clock.yml
 cisco_ios_show_clock.raw
-$ 
+$
 ```
 
 ##### Raw version of input text
@@ -229,7 +226,7 @@ An example of the proper format is shown below:
 ```bash
 $ cat tests/cisco_ios/show_clock/cisco_ios_show_clock.raw
 *18:57:38.347 UTC Mon Oct 19 2015
-$ 
+$
 ```
 
 ##### YAML file containing expected parsed dictionary
@@ -252,12 +249,12 @@ parsed_sample:
     month: "Oct"
     day: "19"
     year: "2015"
-$ 
+$
 ```
 
 Multiple `raw` and `parsed` files are supported per directory, and are encouraged, as there are differences depending on version, length, etc. Additional test files and more real life data helps ensure backwards compatibility is maintained as each template is updated and merged into the repo.
 
-All YAML files must adhere to the YAML standards defined in the `.yamllint` file in the root directory. Yamllint provides thorough documentation of their configuration settings [here](https://yamllint.readthedocs.io/en/stable/rules.html). 
+All YAML files must adhere to the YAML standards defined in the `.yamllint` file in the root directory. Yamllint provides thorough documentation of their configuration settings [here](https://yamllint.readthedocs.io/en/stable/rules.html).
 
 ##### Development Helper Scripts
 
@@ -318,7 +315,7 @@ py36 run-test: commands[2] | pytest -vv
 platform linux -- Python 3.6.7, pytest-6.2.2, py-1.10.0, pluggy-0.13.1 -- /home/travis/build/networktocode/ntc-templates/.tox/py36/bin/python
 cachedir: .tox/py36/.pytest_cache
 rootdir: /home/travis/build/networktocode/ntc-templates
-collected 1065 items                                                           
+collected 1065 items
 
 tests/test_development_scripts.py::test_ensure_spacing_for_multiline_comment PASSED [  0%]
 tests/test_development_scripts.py::test_ensure_space_after_octothorpe PASSED [  0%]
@@ -360,7 +357,7 @@ Changelog should be generated using [github_changelog_generator](https://github.
 FAQ
 ---
 
-From an outsiders view, some design choices, requirements, and testing procedures can seem arbitrary. The following list of FAQ is intended to 
+From an outsiders view, some design choices, requirements, and testing procedures can seem arbitrary. The following list of FAQ is intended to
 help provide context and better guide users and contributors of ntc-templates.
 
 _Why is there a requirement to use `Error` in every template?_
@@ -377,9 +374,9 @@ Gi0/0/2                        up             up       ISP Connection
 Gi0/0/3                        down           down
 ```
 
-The output would miss the G0/0/1 interface, since the `STATUS` of `admin down` not known. If this was a low percentage use case, it can go 
-undetected, and result in incorrect information being returned. Instead, by ensuring that we fail fast, an `Error` is raised and hopefully 
-GitHub Issue is put in. 
+The output would miss the G0/0/1 interface, since the `STATUS` of `admin down` not known. If this was a low percentage use case, it can go
+undetected, and result in incorrect information being returned. Instead, by ensuring that we fail fast, an `Error` is raised and hopefully
+GitHub Issue is put in.
 
 _Then why isn't `Error` used in all templates?_
 
@@ -388,7 +385,7 @@ Initially the controls were not as strong, so many templates were put in until i
 _Does the project support requests for additional templates or additional data in an existing template?_
 
 We are no longer considering additional template requests at this time. The project has existed for over 5 years (initially within ntc-ansible)
-and nearly 200 template at this point any additional requests are essentially edge use cases. Meaning, for five years of usage, no one else 
+and nearly 200 template at this point any additional requests are essentially edge use cases. Meaning, for five years of usage, no one else
 has asked for this feature. There is a limited maintainers who primarily use their free time to maintain the project.
 
 _Are you open to adding maintainers to the project?_
@@ -397,15 +394,15 @@ Yes, we would consider giving a proven member of the project and community maint
 
 _I simply want to add my template to the project, I do not want to add all of these tests and controls, can I just do so?_
 
-Short answer no, from an outsiders point of view the contributor requirements may seem overly complex, however features added by engineers 
-rarely come back to support them. The burden of support is on the maintainers and a certain level of quality assurance is required for that to 
+Short answer no, from an outsiders point of view the contributor requirements may seem overly complex, however features added by engineers
+rarely come back to support them. The burden of support is on the maintainers and a certain level of quality assurance is required for that to
 happen. That includes updating the index file appropriately and adding proper raw and expected value files.
 
 _Why don't you grab all of the data in the template?_
 
-There is no intention for ntc-templates to become feature complete, some of the data is less interesting, or can be better understood from 
-other commands. This is actually an area where the project chose to be loose, as we do not want to over-burden the contributor. If you feel 
-that the additional data should be added, you are welcome to add the feature, but it would not be considered a bug, and thus not supported by 
+There is no intention for ntc-templates to become feature complete, some of the data is less interesting, or can be better understood from
+other commands. This is actually an area where the project chose to be loose, as we do not want to over-burden the contributor. If you feel
+that the additional data should be added, you are welcome to add the feature, but it would not be considered a bug, and thus not supported by
 the maintainers of the this project.
 
 _Why does the index order matter?_
@@ -422,22 +419,22 @@ The most likely reasons are:
 
 * Did not follow the Issue creation template.
 * Did not provide the data required to act upon the request.
-* A prolonged time with no response.  
+* A prolonged time with no response.
 
 _What is meant that this is a parsing project, not a data modeling project?_
 
-The project intends to parse, meaning post processing is assumed in order to normalize the data. This project does not intend to solve that 
-problem set. This is often noted in keys being different between the same command on multiple OS's. This was not intentional as at first there was not strict enforcement. That being said, there is no intention to retrofit this use case for the above stated reasons. This use case is 
+The project intends to parse, meaning post processing is assumed in order to normalize the data. This project does not intend to solve that
+problem set. This is often noted in keys being different between the same command on multiple OS's. This was not intentional as at first there was not strict enforcement. That being said, there is no intention to retrofit this use case for the above stated reasons. This use case is
 best handled in post processing.
 
 _I have never submitted a Pull Request before, how do I do so?_
 
-This is outside the scope of this project, but this [video](https://www.youtube.com/watch?v=rgbCcBNZcdQ) should provide the instructions on 
+This is outside the scope of this project, but this [video](https://www.youtube.com/watch?v=rgbCcBNZcdQ) should provide the instructions on
 how to do so.
 
 _Does this work on windows?_
 
-Based on this [PR](https://github.com/networktocode/ntc-templates/pull/672) it should, however this is not a supported option. We are willing 
+Based on this [PR](https://github.com/networktocode/ntc-templates/pull/672) it should, however this is not a supported option. We are willing
 to take in qualified Pull Requests to have the feature, but have no intention of actively supporting.
 
 _Can you provide general guidance?_
@@ -454,7 +451,7 @@ This means that for users with a build chain that depends on source distribution
 ```
 File "/usr/local/Cellar/foo/version/libexec/lib/python3.7/site-packages/ntc_templates/parse.py", line 3, in <module>
     from textfsm import clitable
-ImportError: cannot import name 'clitable' from 'textfsm' 
+ImportError: cannot import name 'clitable' from 'textfsm'
 ```
 
 What's actually happening here is that textfsm provides a source distribution only up to version 0.4.1 (2018-04-09) but the ntc-templates code relies on the interface from version 1.1.0 (2019-07-24) which is only available as a wheel. So the way for users to fix this problem if they encounter it is to install textfsm 1.1.0.
