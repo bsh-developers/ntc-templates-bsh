@@ -466,6 +466,7 @@ juniper_screenos_get_route.textfsm, .*, juniper_screenos, get route
 
 linux_arp_-a.textfsm, .*, linux, arp -a
 
+mikrotik_routeros_system_resource_print.textfsm, .*, mikrotik_routeros, /system resource print
 mikrotik_routeros_system_clock_print.textfsm, .*, mikrotik_routeros, /system clock print
 
 paloalto_panos_show_running_security-policy.textfsm, .*, paloalto_panos, sh[[ow]] runn[[ing]] security[[-policy]]
